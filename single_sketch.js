@@ -24,29 +24,33 @@ function setup() {
 
 
   fingers =createVideo(['totals.mov']);
-fingers.hide();	
-  buttonVid =createButton('play');
-  buttonVid.position(width/2,10);
- buttonVid.mousePressed(toggleVid);
-// fingers.size(width/2,height);
-	
+  fingers.hide();
+//   buttonVid =createButton('play');
+//   buttonVid.position(width/2,10);
+//  buttonVid.mousePressed(toggleVid);
+fingers.size(width/2,height);
+fingers.loop();
   
-  button = createButton('start interaction');
-  button.position(width/3,10);
+  button = createButton('start sound');
+  button.position(width/2+10,200);
+  button.style('font-size', '30px');
+  var col =color(255,120,20);
+  button.style('background-color', col);
   button.mousePressed(playsounds);
+  
 
   carrier = new p5.Oscillator(); // connects to master output by default
   carrier.freq(240);//340
   carrier.amp(0);
   // carrier's amp is 0 by default, giving our modulator total control
 
-  carrier.start();
+  // carrier.start();
 
   modulator = new p5.Oscillator('triangle');
   modulator.disconnect(); // disconnect the modulator from master output
   modulator.freq(5);
   modulator.amp(1);
-  modulator.start();
+  // modulator.start();
 
   // Modulate the carrier's amplitude with the modulator
   // Optionally, we can scale the signal.
@@ -58,19 +62,27 @@ fingers.hide();
  
 }
 
-
-function toggleVid(){
-  if (playing){
-    fingers.pause();
-    buttonVid.html('play');
-  }else{
-    fingers.loop();
-    buttonVid.html('pause');
+function playsounds(){
   
-  }
-  playing =!playing;
-  
+   if (playing){
+  song.stop();
+  song2.stop();
+  carrier.stop();
+  modulator.stop();
+  button.html('start sound');
+   }
+   else{
+    song.loop();
+  song2.loop();
+  carrier.start();
+  modulator.start();
+  button.html('pause sound');
+   }
+   playing =!playing;
 }
+
+
+
 
 function draw() {
 background(250);
@@ -153,7 +165,7 @@ function mouseDragged() {
 }
 
 function mousePressed(){
-
+  // fingers.play();
    if (mouseX<width/2 && mouseY<height/2){
     time =random(0,90);
    }
@@ -165,12 +177,10 @@ function mousePressed(){
     time = random(180,fingers.duration()); //(180, total.duration());
    }
    fingers.time(time);
-
+    // total.jump(time);
 }
 
-function playsounds(){
-  song.loop();
-  song2.loop();
-}
+
+
 
 
