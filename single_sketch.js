@@ -164,8 +164,8 @@ function mousePressed(){
    else if (mouseY>height/2) {
     time = random(180,fingers.duration()); //(180, total.duration());
    }
-//    fingers.time(time);
-    fingers.jump(time);
+   fingers.time(time);
+
 }
 
 function playsounds(){
