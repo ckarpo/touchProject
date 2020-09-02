@@ -24,10 +24,12 @@ function setup() {
 
 
   fingers =createVideo(['totals.mov']);
+fingers.hide();	
   buttonVid =createButton('play');
   buttonVid.position(width/2,10);
  buttonVid.mousePressed(toggleVid);
-fingers.size(width/2,height);
+// fingers.size(width/2,height);
+	
   
   button = createButton('start interaction');
   button.position(width/3,10);
@@ -162,8 +164,8 @@ function mousePressed(){
    else if (mouseY>height/2) {
     time = random(180,fingers.duration()); //(180, total.duration());
    }
-   fingers.time(time);
-    // total.jump(time);
+//    fingers.time(time);
+    fingers.jump(time);
 }
 
 function playsounds(){
