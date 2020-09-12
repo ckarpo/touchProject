@@ -23,28 +23,34 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
 
 
-  fingers =createVideo(['totals.mov']);
-  buttonVid =createButton('play');
-  buttonVid.position(width/2,10);
- buttonVid.mousePressed(toggleVid);
-fingers.size(width/2,height);
+  fingers =createVideo(['STforTheWeb.mov']);
+  fingers.hide();
+//   buttonVid =createButton('play');
+//   buttonVid.position(width/2,10);
+//  buttonVid.mousePressed(toggleVid);
+fingers.size(width,height);
+fingers.loop();
   
-  button = createButton('start interaction');
-  button.position(width/3,10);
+  button = createButton('start sound');
+  button.position(width/2+10,200);
+  button.style('font-size', '30px');
+  var col =color(255,120,20);
+  button.style('background-color', col);
   button.mousePressed(playsounds);
+  
 
   carrier = new p5.Oscillator(); // connects to master output by default
   carrier.freq(240);//340
   carrier.amp(0);
   // carrier's amp is 0 by default, giving our modulator total control
 
-  carrier.start();
+  // carrier.start();
 
   modulator = new p5.Oscillator('triangle');
   modulator.disconnect(); // disconnect the modulator from master output
   modulator.freq(5);
   modulator.amp(1);
-  modulator.start();
+  // modulator.start();
 
   // Modulate the carrier's amplitude with the modulator
   // Optionally, we can scale the signal.
@@ -56,19 +62,27 @@ fingers.size(width/2,height);
  
 }
 
-
-function toggleVid(){
-  if (playing){
-    fingers.pause();
-    buttonVid.html('play');
-  }else{
-    fingers.loop();
-    buttonVid.html('pause');
+function playsounds(){
   
-  }
-  playing =!playing;
-  
+   if (playing){
+  song.stop();
+  song2.stop();
+  carrier.stop();
+  modulator.stop();
+  button.html('start sound');
+   }
+   else{
+    song.loop();
+  song2.loop();
+  carrier.start();
+  modulator.start();
+  button.html('pause sound');
+   }
+   playing =!playing;
 }
+
+
+
 
 function draw() {
 background(250);
@@ -77,11 +91,11 @@ background(250);
  push();
   
     // fingers.time(time);
-    image(fingers,0,0,width/2,height);
+    image(fingers,-150,0,width,height);
   
   pop();
   push()
-    translate(width/2,0);
+    translate(width/2,-100);
     blendMode(BLEND);
     // background(250);
     blendMode(MULTIPLY);
@@ -138,7 +152,7 @@ function mynoisycir(fcm,vNnum,sm,nm){
 		let ind = i%vNnum;
 		let rad = dr *ind;
       
-		let r = height*0.2 + noise(frameCount/nm + ind) *       height*0.1 + sin(frameCount/sm + ind)*height*0.02;
+		let r = height*0.15 + noise(frameCount/nm + ind) *       height*0.1 + sin(frameCount/sm + ind)*height*0.02;
 		curveVertex(cos(rad)*r, sin(rad)*r);
 	}
 	endShape();
@@ -151,7 +165,7 @@ function mouseDragged() {
 }
 
 function mousePressed(){
-
+  // fingers.play();
    if (mouseX<width/2 && mouseY<height/2){
     time =random(0,90);
    }
@@ -166,9 +180,7 @@ function mousePressed(){
     // total.jump(time);
 }
 
-function playsounds(){
-  song.loop();
-  song2.loop();
-}
+
+
 
 
