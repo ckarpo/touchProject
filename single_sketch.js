@@ -31,12 +31,12 @@ function setup() {
 fingers.size(width,height);
 fingers.loop();
   
-  button = createButton('start sound');
-  button.position(width/2+10,200);
-  button.style('font-size', '30px');
-  var col =color(255,120,20);
-  button.style('background-color', col);
-  button.mousePressed(playsounds);
+//   button = createButton('start sound');
+//   button.position(width/2+10,200);
+//   button.style('font-size', '30px');
+//   var col =color(255,120,20);
+//   button.style('background-color', col);
+//   button.mousePressed(playsounds);
   
 
   carrier = new p5.Oscillator(); // connects to master output by default
