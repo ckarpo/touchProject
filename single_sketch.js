@@ -110,13 +110,13 @@ background(250);
     push();
       translate(2*newWidth/3,height/3);
       fill(228,122,71);
-      mynoisycir(200,40,40,20);
+      mynoisycir(150,50,200,10);
     pop();
       //explore
     push();
       translate(newWidth/2,2*height/3);
       fill(141,237,109);
-      mynoisycir(400,200,10,500);
+      mynoisycir(400,120,100,500);
     pop();
     
     // // Set the volume to a range between 0 and 1.0
@@ -166,18 +166,18 @@ function mouseDragged() {
 
 function mousePressed(){
   // fingers.play();
-   if (mouseX<width/2 && mouseY<height/2){
-    time =random(0,90);
+   if (mouseX>width/2 && mouseX<3*width/4 && mouseY<height/2){
+    time =random(0,100);
    }
-   else if (mouseX>width/2 && mouseY< height/2){
+   else if (mouseX>3*width/4 && mouseY< height/2){
    
-   time= random(90,180);
+   time= random(110,190);
    }
    else if (mouseY>height/2) {
-    time = random(180,fingers.duration()); //(180, total.duration());
+    time = random(205,fingers.duration());
    }
    fingers.time(time);
-    // total.jump(time);
+   c
 }
 
 
